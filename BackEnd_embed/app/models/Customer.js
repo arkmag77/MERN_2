@@ -5,11 +5,12 @@ mongoose.connect('mongodb://' + process.env.DB_HOST + '/' + process.env.DB_NAME,
 
  const schemaAction = new mongoose.Schema({
     date: { type: Date, default: Date.now, /* required: true */ },
-    action_type: {
-        phone: { type: Boolean, /* required: true */ },
-        meeting: { type: Boolean, /* required: true */ },
-        another: { type: String }
-    },
+    action_type: String,
+    // action_type: {
+    //     phone: { type: Boolean, /* required: true */ },
+    //     meeting: { type: Boolean, /* required: true */ },
+    //     another: { type: String }
+    // },
     action_description: { type: String, required: true },
 }); 
 
@@ -26,7 +27,7 @@ const schemaCustomer = new mongoose.Schema({
     actions: [schemaAction]  
 });
 
-module.exports = mongoose.model('Action', schemaAction)
+// module.exports = mongoose.model('Action', schemaAction)
 module.exports = mongoose.model('Customer', schemaCustomer);
 
     
