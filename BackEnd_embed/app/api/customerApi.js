@@ -5,7 +5,9 @@ const customer = require('../controllers/customer.controller');
 const auth = require('../middlewares/authorize');
 
 
-router.get('/all', function (req, res) {
+
+
+router.get('/all', auth, function (req, res) {
 
     customer.list(function (err, customers) {
 
@@ -15,7 +17,6 @@ router.get('/all', function (req, res) {
                 error: 'Customers not found'
             });
         } else {
-
             res.json(customers);
         }
     });
@@ -41,7 +42,7 @@ router.get('/:id', function (req, res) {
 });
 
 
-router.post('/add', /* auth, */ function (req, res) {
+router.post('/add', auth,  function (req, res) {
 
     customer.add(req.body, function (err, customer) {
 

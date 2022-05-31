@@ -1,5 +1,6 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 function userAdd(data, cb) {
 
@@ -43,8 +44,20 @@ function userLogin(data, cb) {
     })
 }
 
+function userLogout(data, cb) {
+    const authHeader = data.headers["x-auth-token"];
+    jwt.sign(authHeader, "", { expiresIn: 1 }, (logout, err) => {
+        if (logout) {
+          cb(null);
+        } else {
+          cb(err)
+        }
+      });
+}
+
 module.exports = {
     add: userAdd,
-    login: userLogin
+    login: userLogin,
+    logout: userLogout
 }
 

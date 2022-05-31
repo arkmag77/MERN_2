@@ -5,7 +5,7 @@ const action = require('../controllers/action.controller');
 const auth = require('../middlewares/authorize');
 
 
-router.get('/all', function (req, res){
+router.get('/all', auth, function (req, res){
 
     action.list(function(err, actions){
 
